@@ -38,6 +38,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 Schema Design:
 This schema design creates a flexible, scalable system for managing courses, tracking user progress, and handling purchases. The relationships enable complex queries while maintaining data integrity.
 
+Maintainance:
+Separation of Tables and Relationships. Defining tables first, then relationships separately. This pattern makes the code more readable and maintainable.
+Splitting schemas into separate files by entity type (course.ts, user.ts, etc.)
+Central export point in schema.ts
+
 Basic Structure:
 Products: are the top-level sellable items
 Courses: are included in products
