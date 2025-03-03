@@ -10,3 +10,7 @@ export const env = createEnv({
   },
   experimental__runtimeEnv: process.env,
 });
+
+//this file reads values from the .env file and then validate them
+//if they are not valid, it will throw an error
+//and then send the values to db.ts and drizzle.config.ts
