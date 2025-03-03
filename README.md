@@ -1,3 +1,5 @@
+This project is following this tutorial on YouTube: https://youtu.be/OAyQ3Wyyzfg?si=T7nWFbUx2lWS85Rr
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -124,3 +126,6 @@ Schema Design Decisions
    onDelete: "cascade" automatically removes dependent records
    onDelete: "restrict" prevents deletion when dependencies exist
    Unique constraints on important identifiers
+
+Docker & Drizzle:
+I followed the tutorial and can do "npm run db:generate" but the rest is not working as video shows, so I watched this tutorial: https://youtu.be/bw-bMhlhcpg?si=CcP1he3dHTo9OZEb following the steps activating WSL, and other stuff. And then I opened Docker as "Run as Adminsstrator" and skipped all setup. And I opened the Admin terminal again typed in "docker compose up" then it works. and then I go back to VSCode type in "npm run db:migrate" and then it works and "npm run db:studio", I see the tables all in there in Drizzle.
