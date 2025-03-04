@@ -11,7 +11,8 @@ export const db = drizzle({
     host: env.DB_HOST, //the database server, IP address or domain name
   },
 });
-
+//這個文件是用來連接數據庫的
+//連接數據庫需要密碼、用戶名、數據庫名、主機名
 //import everything from schema.ts and pass it to drizzle so that hook up the database
 //and then we can db.query to access the whole bunch of stuff in the database
 
