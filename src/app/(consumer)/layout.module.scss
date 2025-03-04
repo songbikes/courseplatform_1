@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  width: clamp(320px, 90%, 1500px);
+  border-bottom: 1px solid var(--grey-100);
+  margin: 0 auto;    
+  padding: 1rem;
+  gap: 2rem;
+
+  .link {
+      padding: 0 1rem;
+    }
+}
