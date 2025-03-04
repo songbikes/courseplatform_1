@@ -37,7 +37,8 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-Schema Design:
+## Schema Design
+
 This schema design creates a flexible, scalable system for managing courses, tracking user progress, and handling purchases. The relationships enable complex queries while maintaining data integrity.
 
 Maintainance:
@@ -129,3 +130,49 @@ Schema Design Decisions
 
 Docker & Drizzle:
 I followed the tutorial and can do "npm run db:generate" but the rest is not working as video shows, so I watched this tutorial: https://youtu.be/bw-bMhlhcpg?si=CcP1he3dHTo9OZEb following the steps activating WSL, and other stuff. And then I opened Docker as "Run as Adminsstrator" and skipped all setup. And I opened the Admin terminal again typed in "docker compose up" then it works. and then I go back to VSCode type in "npm run db:migrate" and then it works and "npm run db:studio", I see the tables all in there in Drizzle.
+
+## Clerk x Databse
+
+1. 設置數據庫模式:
+   在 uesr.ts 定義 table 結構
+   包含必要值: id, clerkUserId, email, name, role
+2. 配置數據庫連結:
+   在 db.ts 中的 connection 設置連結
+   使用.env 儲存敏感訊息比如 hook, api 的密碼
+3. 用戶的帳戶行為的函數:
+   在 src 下新增 features/users/db 資料夾
+   新增 users.ts 儲存用戶 CRUD 操作函數
+4. 設置 Clerk Webhook 處理:
+   在 app 下建立 api/webhooks/clerk 新增 route.ts
+   安裝 svix 使用 svix 驗證請求確保安全如 Clerk 建議
+   從 users.ts 導入 CRUD 函數 讓用戶行為可以雙向同步
+5. 在 Clerk webhooks 中插入 endpoint url
+   ctrl+j 在 PORTS 中創立 url 來測試 設為 public
+   貼上後 選擇 events 確定後複製 secret key 到.env 中
+6. 在 src 內新增 services 資料夾 建立 clerk.ts
+   這個檔案是用來處理 clerk 的用戶和數據庫的交互
+   包括更新 clerk 用戶的 metadata
+
+其他:
+
+1. 在 data 資料夾內心增 typeOverrides 資料夾 建立 clerk.d.ts 新增自訂義 types to Clerk so typescript can detect them
+2. 在 tsconfig 中新增"noUncheckedIndexedAccess": true, 這個讓 typescript 更嚴格地檢查通過索引訪問的值 強制處理可能不存在的情況
+
+[Next.js API Route]
+[route.ts] <---- Clerk Webhook 请求
+│
+▼
+[数据库操作层]
+/features/users/db/users.ts <---- 调用数据库操作函数
+│
+▼
+[数据库连接]
+/drizzle/db.ts <---- 提供数据库连接
+│
+▼
+[数据模型定义]
+/drizzle/schema/user.ts <---- 定义数据表结构
+│
+▼
+[同步服务]
+/services/clerk.ts <---- 同步数据回 Clerk
