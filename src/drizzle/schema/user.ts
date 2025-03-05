@@ -2,7 +2,11 @@ import { pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import { createdAt, updatedAt, id } from "../schemaHelper";
 import { UserCourseAccessTable } from "./userCourseAccess";
-
+//the 3 lines below shows the pattern of defining fixed options in Drizzle ORM.
+//the first line defines the options we want
+// the second line gives the options a type that typescript can understand
+//the third line creates a enum type that postgreSQL can understand
+//第一行設定我們要的值 第二行把那些值定義成typescript可辨識的類型 第三行用enum這個我不知道為什麼已經限制只有兩個選項了 還要在用一個聽說但我也不知道為什麼會更嚴格的enum把要得值包進去 可能是因為要跟postgreSQL溝通吧 總之這是後端的東西
 export const userRoles = ["admin", "user"] as const;
 export type UserRole = (typeof userRoles)[number];
 export const userRoleEnum = pgEnum("user_role", userRoles);
