@@ -1,6 +1,7 @@
 import { db } from "@/drizzle/db";
 import { UserTable } from "@/drizzle/schema";
 import { eq } from "drizzle-orm";
+import { revalidateUserCache } from "./cache";
 
 //this file is for user's interaction with database
 //inserting user into database
@@ -14,9 +15,10 @@ export async function insertUser(data: typeof UserTable.$inferInsert) {
     set: data,
   });
 
-  if (newUser == null) {
+  if (newUser == null) 
     throw new Error("Failed to create user");
-  }
+    revalidateUserCache(newUser.id);
+  
   return newUser;
 }
 //update user
@@ -29,9 +31,9 @@ export async function updateUser(
   .where(eq(UserTable.clerkUserId, clerkUserId))
   .returning()
 
-  if (updatedUser == null) {
+  if (updatedUser == null) 
     throw new Error("Failed to update user");
-  }
+    revalidateUserCache(updatedUser.id);
   return updatedUser;
 }
 //delete user
@@ -49,9 +51,9 @@ export async function deleteUser(
   .where(eq(UserTable.clerkUserId, clerkUserId))
   .returning()
 
-  if (deletedUser == null) {
+  if (deletedUser == null) 
     throw new Error("Failed to update user");
-  }
+    revalidateUserCache(deletedUser.id);
   return deletedUser;
 }
 //這個檔案是用來儲存處理用戶和數據庫的交互的函數 提供給其他文件使用像是route.ts
