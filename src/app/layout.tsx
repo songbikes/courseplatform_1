@@ -1,13 +1,6 @@
 import type { Metadata } from "next";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
-import "./globals.css";
+import { ClerkProvider } from '@clerk/nextjs'
+import "@styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
