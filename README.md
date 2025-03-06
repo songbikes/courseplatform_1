@@ -176,3 +176,9 @@ I followed the tutorial and can do "npm run db:generate" but the rest is not wor
 ▼
 [同步服务]
 /services/clerk.ts <---- 同步数据回 Clerk
+
+## Clerk Component Issues
+
+I tried to resolve the issue when remoing "use client" from components have Clerk components, it was the Clerk components I imported should be:
+@clerk/nextjs
+instead of @clerk/clerk-react
