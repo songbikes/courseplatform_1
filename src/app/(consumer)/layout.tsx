@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import "../globals.css";
 import { getCurrentUser } from "@/services/clerk";
 import { canAccessAdminPages } from "@/permissions/general";
 import NavbarClient from "./navbarClient";
