@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { Suspense } from "react";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
-import ss from "./layout.module.scss";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import ss from "@styles/layout.module.scss";
 
 // different from the tutorial as Clerk is client side only and does not have a server side component, somehow it works without the server side component in the tutorial but not in my case
 export default function NavbarClient({ hasAdminAccess = false }) {
@@ -28,7 +28,7 @@ export default function NavbarClient({ hasAdminAccess = false }) {
             <div>
               <UserButton appearance={{
                 elements: {
-                  userButtonAvatarBox: { width: "100%", height: "100%" },
+                  userButtonAvatarBox: { width: "50%", height: "50%" },
                 }
               }}/>
             </div>
